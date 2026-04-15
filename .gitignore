@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+reproducible_pipeline/.mplconfig/
+reproducible_pipeline/outputs/run_*/predictions.csv
+reproducible_pipeline/outputs/run_*/weekday_*_split.csv
+reproducible_pipeline/outputs/run_*/weekend_*_split.csv
+reproducible_pipeline/outputs/run_*/feature_frame_sample.csv

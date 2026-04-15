@@ -1,0 +1,41 @@
+[data]
+weather_csv = "july_to_dec_2024_cleaned.csv"
+merged_station_hour_csv = "30th_may/merged_docked_dockless_weather.csv"
+dockless_trip_csv = "30th_may/enhanced_full_dataset_20250727_0524.csv"
+
+[split]
+train_end = "2024-11-01 00:00:00"
+val_end = "2024-12-01 00:00:00"
+
+[feature]
+target_col = "total_count"
+station_id_col = "station_id"
+time_col = "hourly"
+add_lag_features = true
+lag_hours = [1, 24, 168]
+add_cluster_proxy = false
+use_event_features = true
+events_calendar_csv = "reproducible_pipeline/events/calendar_ireland_2024h2.csv"
+
+[model]
+random_state = 42
+random_forest_n_estimators = 300
+random_forest_max_depth = 16
+random_forest_min_samples_leaf = 3
+
+[cluster]
+algorithm = "kmeans"
+random_state = 42
+k_min = 6
+k_max = 16
+
+[neighbor]
+k_neighbors = 5
+distance_metric = "euclidean"
+
+[evaluation]
+baseline_metrics_csv = "reproducible_pipeline/outputs/run_20260415_102043/metrics_all.csv"
+
+[output]
+output_dir = "reproducible_pipeline/outputs"
+run_name = "auto"

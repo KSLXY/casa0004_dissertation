@@ -1,0 +1,25 @@
+{
+  "weather": {
+    "path": "july_to_dec_2024_cleaned.csv",
+    "size_bytes": 327177,
+    "modified_time": 1753378077.0827131,
+    "sha256_head_1mb": "0c3c28cc750573f042bbf74d02c6fb4b4bdab12960bb073de61c6a327b95ad36"
+  },
+  "merged_station_hour": {
+    "path": "30th_may/merged_docked_dockless_weather.csv",
+    "size_bytes": 58694203,
+    "modified_time": 1755435835.796639,
+    "sha256_head_1mb": "b105581a9a5145e19d7aa0ee1aaec8c551da40767fdd60cd89ade9a34c2dbf72"
+  },
+  "dockless_trip": {
+    "path": "30th_may/enhanced_full_dataset_20250727_0524.csv",
+    "size_bytes": 44511560,
+    "modified_time": 1753593854.7820597,
+    "sha256_head_1mb": "10c7e4a8b4932bed6acf68c3f40851515af55ee61a07409a6b8cff55dcd571dc"
+  },
+  "row_counts": {
+    "weather": 4416,
+    "merged_station_hour": 502602,
+    "dockless_trip": 103038
+  }
+}
