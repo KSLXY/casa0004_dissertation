@@ -12,161 +12,10 @@ ROOT = Path(__file__).resolve().parent
 OUTPUTS_DIR = ROOT / "outputs"
 
 
-I18N = {
-    "zh": {
-        "title": "Casa0004 共享单车故事看板",
-        "lang": "语言 / Language",
-        "run_select": "查看哪个版本的结果",
-        "current_run": "结果版本",
-        "note": "阅读说明",
-        "note1": "这是一条连续故事线：背景 → 方法 → 结果 → 原因 → 边界 → 下一步。",
-        "note2": "专业术语被放在“补充解释”里，主文案尽量通俗。",
-        "tabs": ["1 背景", "2 方法", "3 结果", "4 原因", "5 边界", "6 下一步"],
-        "story_steps": ["背景问题", "如何做", "做出来什么", "为什么有效", "风险与不足", "改进空间"],
-        "header_q": "这一页想回答",
-        "header_prev": "先接上一步",
-        "header_core": "你会在这一页得到",
-        "header_next": "看完后自然进入",
-        "continue": "继续阅读",
-        "continue_hint": "请点击上方 Tab：",
-        "missing": "当前版本缺少这个文件，已自动降级显示。",
-        "overview_intro": "如果你是第一次看，请把这个项目理解为：我们想提前知道哪里、什么时候会更需要共享单车，这样调度更省力，用户更容易借到车。",
-        "overview_bg": "都柏林共享单车同时受到通勤规律、天气、节假日和空间位置影响，需求会明显波动。",
-        "overview_goal": "目标是把这些信息汇总成一个可重复运行的预测流程，并解释模型为什么这么判断。",
-        "rows_feature": "特征行数",
-        "rows_pred": "预测行数",
-        "summary_json": "本次运行摘要",
-        "method_intro": "这一页讲‘怎么做’：我们不是直接训练模型，而是先把原始数据一步步变成有意义的特征。",
-        "method_block1": "数据接入：校验字段是否齐全，记录数据版本，保证复现。",
-        "method_block2": "空间增强：给站点分群（cluster）并找邻近站点，让模型看到‘周边影响’。",
-        "method_block3": "事件增强：把节假日、学校假期、大型活动加入同一天的特征。",
-        "method_block4": "训练设计：工作日和周末分开训练，并做 5 组消融实验看每个改动是否真的有用。",
-        "cluster_summary": "站点分群摘要",
-        "neighbor_top": "站点邻接示例（前20行）",
-        "result_intro": "这一页看‘做出来什么’：核心看 R²（越高代表模型越能解释真实波动）。",
-        "metrics_table": "完整指标表（可筛选）",
-        "ablation_best": "每个场景的最佳结果（Ablation）",
-        "result_takeaway": "如果 full 场景的 R² 高于其他场景，说明“空间+事件”这套增强是有价值的。",
-        "feature_intro": "这一页解释‘为什么有效’：模型最依赖哪些信息来做判断。",
-        "spatial_fi": "空间/事件特征重要性",
-        "full_fi": "查看完整特征重要性表",
-        "feature_takeaway": "如果 cluster/neighbor/event 相关特征排名靠前，说明它们确实在帮模型抓住规律。",
-        "pred_intro": "这一页看‘哪里稳、哪里不稳’：用残差图和样本表观察误差模式。",
-        "resid_img": "残差分布图",
-        "model_img": "模型对比图",
-        "view_pred": "按场景/分段/模型查看预测样本",
-        "err_station": "站点级误差汇总",
-        "pred_takeaway": "误差大的站点通常代表异常波动多，后续需要补更多上下文特征。",
-        "next_intro": "最后一页把前面内容收束成结论，并给出下一步可落地优化。",
-        "conclusion": "结论草稿",
-        "report": "报告摘要",
-        "next_actions": "建议下一步",
-        "action1": "补充更细粒度事件数据（演唱会、比赛、施工影响）。",
-        "action2": "引入实时数据更新机制，做滚动预测。",
-        "action3": "增加站点运营约束（车辆上限、调度成本）做业务优化。",
-        "glossary": "补充解释（术语）",
-        "g_r2": "R²：衡量模型解释能力的指标，通常越高越好。",
-        "g_ablation": "消融（Ablation）：每次只增加一个改动，比较是否真的带来提升。",
-        "g_fi": "特征重要性：模型在预测时更依赖哪些输入信息。",
-        "s0_prev": "这是故事开场，我们先把问题讲清楚。",
-        "s0_core": "先回答“为什么要做这件事”，再进入方法。",
-        "s0_next": "2 方法",
-        "s1_prev": "现在我们已经知道了问题，接下来解释我们怎么一步步做出来。",
-        "s1_core": "把原始数据整理成模型能理解的信息，并保证可复现。",
-        "s1_next": "3 结果",
-        "s2_prev": "方法准备好之后，这一页看结果到底有没有变好。",
-        "s2_core": "对比不同方案，找出真正有效的改动。",
-        "s2_next": "4 原因",
-        "s3_prev": "看到结果之后，我们继续回答：为什么会变好？",
-        "s3_core": "找出模型最依赖的关键信号，避免“只看分数”。",
-        "s3_next": "5 边界",
-        "s4_prev": "知道了有效因素后，还要看模型在哪些地方不稳定。",
-        "s4_core": "定位误差大的场景，明确当前方案的边界。",
-        "s4_next": "6 下一步",
-        "s5_prev": "最后把前面五步收拢成一条完整结论。",
-        "s5_core": "给出可执行的下一步，而不是停在分析结论。",
-        "s5_next": "故事结束",
-    },
-    "en": {
-        "title": "Casa0004 Bike-Sharing Story Dashboard",
-        "lang": "Language / 语言",
-        "run_select": "Choose result version",
-        "current_run": "Result Version",
-        "note": "How to read",
-        "note1": "This dashboard is a continuous story: problem -> method -> result -> reason -> boundary -> next step.",
-        "note2": "Technical terms are moved into “Glossary”, while the main text stays plain-language.",
-        "tabs": ["1 Background", "2 Method", "3 Results", "4 Why It Works", "5 Limits", "6 Next Step"],
-        "story_steps": ["Problem", "How we did it", "What we got", "Why it works", "Risks & limits", "Improvement"],
-        "header_q": "What this page answers",
-        "header_prev": "Building from the previous page",
-        "header_core": "What you will take away here",
-        "header_next": "Natural next stop",
-        "continue": "Continue",
-        "continue_hint": "Please open the tab:",
-        "missing": "This file is missing in the selected run. Fallback view is shown.",
-        "overview_intro": "If this is your first time here: the goal is to predict where/when shared bikes are needed, so operations can move bikes earlier and users can find bikes more easily.",
-        "overview_bg": "Bike demand in Dublin changes with commuting patterns, weather, holidays, and location context.",
-        "overview_goal": "We build a reproducible pipeline and explain not only “how accurate” but also “why the model decides this way.”",
-        "rows_feature": "Feature Rows",
-        "rows_pred": "Prediction Rows",
-        "summary_json": "Run summary",
-        "method_intro": "This tab explains the method: we do not train directly on raw data; we first transform data into meaningful signals.",
-        "method_block1": "Ingest: validate schema and track data version for reproducibility.",
-        "method_block2": "Spatial enhancement: cluster stations and add neighbor spillover signals.",
-        "method_block3": "Event enhancement: merge public holidays, school breaks, and major events.",
-        "method_block4": "Training design: split weekday/weekend and run 5-scenario ablation to verify incremental value.",
-        "cluster_summary": "Cluster summary",
-        "neighbor_top": "Neighbor sample (top 20)",
-        "result_intro": "This tab shows what we got. Main metric is R² (higher usually means better explanatory power).",
-        "metrics_table": "Full metrics table (filterable)",
-        "ablation_best": "Best result by scenario (ablation)",
-        "result_takeaway": "If the full scenario beats others on R², the spatial+event enhancements are likely useful.",
-        "feature_intro": "This tab explains why it works: which signals the model relies on most.",
-        "spatial_fi": "Spatial/Event feature importance",
-        "full_fi": "Show full feature importance table",
-        "feature_takeaway": "If cluster/neighbor/event features rank high, they are likely driving performance gains.",
-        "pred_intro": "This tab shows where the model is stable or unstable using residuals and sample predictions.",
-        "resid_img": "Residual distribution",
-        "model_img": "Model comparison",
-        "view_pred": "View prediction samples by scenario/segment/model",
-        "err_station": "Station-level error summary",
-        "pred_takeaway": "Large-error stations often indicate stronger external shocks; they need richer context features.",
-        "next_intro": "This final tab wraps up the story and gives actionable next improvements.",
-        "conclusion": "Conclusion draft",
-        "report": "Report snapshot",
-        "next_actions": "Suggested next actions",
-        "action1": "Add more fine-grained events (concerts, sports, roadworks).",
-        "action2": "Introduce rolling updates for near-real-time forecasting.",
-        "action3": "Add operation constraints (station capacity, dispatch cost) for business optimization.",
-        "glossary": "Glossary",
-        "g_r2": "R²: model explanatory score; higher is usually better.",
-        "g_ablation": "Ablation: add one change at a time to verify real incremental value.",
-        "g_fi": "Feature importance: which inputs the model depends on most.",
-        "s0_prev": "This is the opening of the story, where we frame the real-world problem.",
-        "s0_core": "Start with why this work matters before jumping into methods.",
-        "s0_next": "2 Method",
-        "s1_prev": "Now that the problem is clear, we explain how the solution is built step by step.",
-        "s1_core": "Turn raw data into reliable model signals, with reproducibility in mind.",
-        "s1_next": "3 Results",
-        "s2_prev": "With the method in place, we now check whether performance actually improves.",
-        "s2_core": "Compare scenarios to identify changes that truly add value.",
-        "s2_next": "4 Why It Works",
-        "s3_prev": "After seeing the scores, we answer why the model improves.",
-        "s3_core": "Highlight the signals the model relies on most, beyond headline metrics.",
-        "s3_next": "5 Limits",
-        "s4_prev": "Even good models have weak spots; this page maps those boundaries.",
-        "s4_core": "Locate high-error cases and clarify where the current setup is less stable.",
-        "s4_next": "6 Next Step",
-        "s5_prev": "This is the wrap-up page that ties the whole story together.",
-        "s5_core": "Translate findings into concrete, practical next actions.",
-        "s5_next": "End of story",
-    },
-}
-
-
 @st.cache_data(show_spinner=False)
 def list_runs() -> List[Path]:
-    return sorted([p for p in OUTPUTS_DIR.glob("run_*") if p.is_dir()])
+    runs = sorted([p for p in OUTPUTS_DIR.glob("run_*") if p.is_dir()])
+    return runs
 
 
 @st.cache_data(show_spinner=False)
@@ -190,6 +39,7 @@ def read_text_safe(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+
 def load_run_artifacts(run_dir: Path) -> Dict[str, object]:
     return {
         "metrics": read_csv_safe(run_dir / "metrics_all.csv"),
@@ -199,6 +49,7 @@ def load_run_artifacts(run_dir: Path) -> Dict[str, object]:
         "error_analysis": read_csv_safe(run_dir / "error_analysis.csv"),
         "predictions": read_csv_safe(run_dir / "predictions.csv"),
         "neighbors": read_csv_safe(run_dir / "station_neighbors.csv"),
+        "cluster_map": read_csv_safe(run_dir / "cluster_artifacts" / "station_cluster_map.csv"),
         "cluster_summary": read_csv_safe(run_dir / "cluster_artifacts" / "cluster_summary.csv"),
         "summary": read_json_safe(run_dir / "run_summary.json"),
         "report": read_text_safe(run_dir / "report.md"),
@@ -208,271 +59,280 @@ def load_run_artifacts(run_dir: Path) -> Dict[str, object]:
     }
 
 
+
 def ensure_scenario(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
     if "scenario" not in df.columns:
-        out = df.copy()
-        out["scenario"] = "legacy"
-        return out
+        df = df.copy()
+        df["scenario"] = "legacy"
     return df
 
 
-def render_story_nav(current_idx: int, t: Dict[str, object]) -> None:
-    labels = t["story_steps"]
-    cols = st.columns(6)
-    for i, label in enumerate(labels):
-        if i == current_idx:
-            cols[i].markdown(f"**➡ {i+1}. {label}**")
-        else:
-            cols[i].markdown(f"{i+1}. {label}")
+
+def render_story_header(prev_text: str, core_text: str, next_text: str) -> None:
+    st.markdown(prev_text)
+    st.markdown(f"**本页核心结论**  {core_text}")
+    st.caption(next_text)
 
 
-def render_step_header(current_idx: int, prev_text: str, core_text: str, next_text: str, t: Dict[str, object]) -> None:
-    render_story_nav(current_idx, t)
-    st.markdown("---")
-    st.markdown(f"**{t['header_q']}**: {t['story_steps'][current_idx]}")
-    st.markdown(f"**{t['header_prev']}**: {prev_text}")
-    st.markdown(f"**{t['header_core']}**: {core_text}")
-    st.markdown(f"**{t['header_next']}**: {next_text}")
-
-
-def render_continue_hint(next_tab_label: str, t: Dict[str, object], key: str) -> None:
-    if st.button(t["continue"], key=key):
-        st.info(f"{t['continue_hint']} {next_tab_label}")
-
-
-def show_overview(data: Dict[str, object], current_run: Path, t: Dict[str, object]) -> None:
-    render_step_header(
-        0,
-        prev_text=t["s0_prev"],
-        core_text=t["s0_core"],
-        next_text=t["s0_next"],
-        t=t,
+def show_overview(current_run: Path, data: Dict[str, object]) -> None:
+    st.subheader("项目概览")
+    render_story_header(
+        "这一步用于说明研究背景，并建立后续分析的阅读框架。",
+        "共享单车需求会随时段、天气与空间位置波动，稳定预测可支持调度与资源配置。",
+        "下一步进入数据处理流程，说明原始记录如何转化为可训练特征。",
     )
-    st.markdown(f"- {t['overview_intro']}")
-    st.markdown(f"- {t['overview_bg']}")
+    st.markdown(
+        """
+本看板展示 Casa0004 的可复现建模流程。流程覆盖数据接入、特征构建、空间增强、事件增强、效果评估与结果解释。  
+目标是将分散的分析步骤整理为可复跑、可复核、可解释的一条链路。
+        """
+    )
 
     summary = data["summary"]
     c1, c2, c3 = st.columns(3)
-    c1.metric(t["current_run"], current_run.name)
-    c2.metric(t["rows_feature"], f"{summary.get('rows', {}).get('feature_frame', 'N/A')}")
-    c3.metric(t["rows_pred"], f"{summary.get('rows', {}).get('predictions', 'N/A')}")
+    c1.metric("当前版本", current_run.name)
+    c2.metric("特征行数", f"{summary.get('rows', {}).get('feature_frame', 'N/A')}")
+    c3.metric("预测行数", f"{summary.get('rows', {}).get('predictions', 'N/A')}")
 
-    st.markdown(f"**{t['summary_json']}**")
-    st.json(summary if summary else {})
-
-    with st.expander(t["glossary"]):
-        st.markdown(f"- {t['g_r2']}")
-        st.markdown(f"- {t['g_ablation']}")
-        st.markdown(f"- {t['g_fi']}")
-
-    render_continue_hint(t["tabs"][1], t, key="continue_0")
+    if summary:
+        st.markdown("**运行摘要 `run_summary.json`**")
+        st.json(summary)
 
 
-def show_method(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(1, t["s1_prev"], t["s1_core"], t["s1_next"], t)
-    st.markdown(f"1. {t['method_block1']}")
-    st.markdown(f"2. {t['method_block2']}")
-    st.markdown(f"3. {t['method_block3']}")
-    st.markdown(f"4. {t['method_block4']}")
 
-    c1, c2 = st.columns(2)
-    c1.markdown(f"**{t['cluster_summary']}**")
-    if data["cluster_summary"].empty:
-        c1.info(t["missing"])
+def show_pipeline_process(data: Dict[str, object]) -> None:
+    st.subheader("流程与工件")
+    render_story_header(
+        "上一页给出研究目标，这一步说明实现路径与关键中间产物。",
+        "同一份原始数据会按固定顺序完成清洗、空间构建、事件合并与训练评估，结果可以重复得到。",
+        "下一步查看量化结果，判断不同方案带来的性能变化。",
+    )
+    st.markdown(
+        """
+1. `data_ingest` 统一输入结构，并生成 `data_version.json` 用于版本记录  
+2. `cluster_stage` 搜索合适簇数，并输出 `cluster_artifacts/*`  
+3. `neighbor_stage` 构建 `station_neighbors.csv`，提取邻近站点滞后流量  
+4. `event_stage` 合并法定假日、学校假期与重点活动信息  
+5. `train` 按工作日与周末分别训练多组模型  
+6. `evaluate` 与 `report` 输出指标文件、图表与结论草稿
+        """
+    )
+
+    left, right = st.columns(2)
+    cluster_summary = data["cluster_summary"]
+    neighbors = data["neighbors"]
+
+    left.markdown("**聚类结果摘要**")
+    if not cluster_summary.empty:
+        left.dataframe(cluster_summary, use_container_width=True)
     else:
-        c1.dataframe(data["cluster_summary"], use_container_width=True)
+        left.info("当前版本未找到 `cluster_summary.csv`")
 
-    c2.markdown(f"**{t['neighbor_top']}**")
-    if data["neighbors"].empty:
-        c2.info(t["missing"])
+    right.markdown("**邻接关系示例 前20行**")
+    if not neighbors.empty:
+        right.dataframe(neighbors.head(20), use_container_width=True)
     else:
-        c2.dataframe(data["neighbors"].head(20), use_container_width=True)
-
-    render_continue_hint(t["tabs"][2], t, key="continue_1")
+        right.info("当前版本未找到 `station_neighbors.csv`")
 
 
-def show_results(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(2, t["s2_prev"], t["s2_core"], t["s2_next"], t)
+
+def show_metrics_and_ablation(data: Dict[str, object]) -> None:
+    st.subheader("结果与消融")
+    render_story_header(
+        "上一页说明了数据如何进入模型，这一步集中展示训练结果。",
+        "分场景消融可识别哪些新增信息确实提升了预测质量。",
+        "下一步解释提升来自哪些特征，并说明其现实含义。",
+    )
 
     metrics = ensure_scenario(data["metrics"])
     if metrics.empty:
-        st.warning(t["missing"])
+        st.warning("当前版本缺少 `metrics_all.csv`")
         return
 
-    scenarios = sorted(metrics["scenario"].unique())
-    segments = sorted(metrics["segment"].unique())
-    models = sorted(metrics["model"].unique())
-
-    if "filter_scenarios" not in st.session_state:
-        st.session_state["filter_scenarios"] = scenarios
-    if "filter_segments" not in st.session_state:
-        st.session_state["filter_segments"] = segments
-    if "filter_models" not in st.session_state:
-        st.session_state["filter_models"] = models
+    st.markdown("**完整指标表 可筛选查看**")
+    scenario_options = sorted(metrics["scenario"].unique().tolist())
+    seg_options = sorted(metrics["segment"].unique().tolist())
+    model_options = sorted(metrics["model"].unique().tolist())
 
     c1, c2, c3 = st.columns(3)
-    st.session_state["filter_scenarios"] = c1.multiselect("Scenario", scenarios, default=st.session_state["filter_scenarios"])
-    st.session_state["filter_segments"] = c2.multiselect("Segment", segments, default=st.session_state["filter_segments"])
-    st.session_state["filter_models"] = c3.multiselect("Model", models, default=st.session_state["filter_models"])
+    pick_scenario = c1.multiselect("Scenario", scenario_options, default=scenario_options)
+    pick_seg = c2.multiselect("Segment", seg_options, default=seg_options)
+    pick_model = c3.multiselect("Model", model_options, default=model_options)
 
     view = metrics[
-        metrics["scenario"].isin(st.session_state["filter_scenarios"])
-        & metrics["segment"].isin(st.session_state["filter_segments"])
-        & metrics["model"].isin(st.session_state["filter_models"])
-    ].sort_values(["scenario", "segment", "R2"], ascending=[True, True, False])
+        metrics["scenario"].isin(pick_scenario)
+        & metrics["segment"].isin(pick_seg)
+        & metrics["model"].isin(pick_model)
+    ].copy()
 
-    st.markdown(f"**{t['metrics_table']}**")
-    st.dataframe(view, use_container_width=True)
+    st.dataframe(view.sort_values(["scenario", "segment", "R2"], ascending=[True, True, False]), use_container_width=True)
 
+    st.markdown("**消融最优结果 按 scenario 与 segment 汇总**")
     ablation = data["ablation"]
     if ablation.empty:
-        ablation = metrics.sort_values(["scenario", "segment", "R2"], ascending=[True, True, False]).groupby(["scenario", "segment"], as_index=False).head(1)
-
-    st.markdown(f"**{t['ablation_best']}**")
+        ablation = (
+            metrics.sort_values(["scenario", "segment", "R2"], ascending=[True, True, False])
+            .groupby(["scenario", "segment"], as_index=False)
+            .head(1)
+        )
     st.dataframe(ablation, use_container_width=True)
 
-    chart = ablation[["scenario", "segment", "R2"]].copy()
-    chart["name"] = chart["scenario"] + " | " + chart["segment"]
-    st.bar_chart(chart.set_index("name")["R2"], height=320)
-
-    st.success(t["result_takeaway"])
-    render_continue_hint(t["tabs"][3], t, key="continue_2")
+    # Visual R2 comparison
+    chart_df = ablation[["scenario", "segment", "R2"]].copy()
+    chart_df["name"] = chart_df["scenario"] + " | " + chart_df["segment"]
+    st.bar_chart(chart_df.set_index("name")["R2"], height=340)
 
 
-def show_feature_insights(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(3, t["s3_prev"], t["s3_core"], t["s3_next"], t)
 
+def show_feature_insights(data: Dict[str, object]) -> None:
+    st.subheader("特征解释")
+    render_story_header(
+        "上一页展示了结果差异，这一步解释差异形成的原因。",
+        "空间与事件特征在不同分段中的重要性不同，提示需求变化具有明显场景依赖。",
+        "下一步查看误差分布，识别模型稳定与不稳定的位置。",
+    )
     spatial = data["spatial_fi"]
-    if spatial.empty:
-        st.warning(t["missing"])
-        return
+    all_fi = data["feature_importance"]
 
-    st.markdown(f"**{t['spatial_fi']}**")
-    st.dataframe(spatial.head(100), use_container_width=True)
+    st.markdown("**空间与事件特征重要性 `spatial_feature_importance.csv`**")
+    if not spatial.empty:
+        st.dataframe(spatial.head(80), use_container_width=True)
 
-    focus = spatial.copy()
-    if "scenario" in focus.columns and "full" in focus["scenario"].unique():
-        focus = focus[focus["scenario"] == "full"]
-    top = focus.sort_values("importance", ascending=False).head(20)
-    top = top.assign(label=top["segment"] + " | " + top["feature"])
-    st.bar_chart(top.set_index("label")["importance"], height=340)
+        focus = spatial.copy()
+        if "scenario" in focus.columns and "full" in focus["scenario"].unique():
+            focus = focus[focus["scenario"] == "full"]
+        top = focus.sort_values("importance", ascending=False).head(20)
+        top = top.assign(label=top["segment"] + " | " + top["feature"])
+        st.bar_chart(top.set_index("label")["importance"], height=360)
+    else:
+        st.info("当前版本未找到 `spatial_feature_importance.csv`")
 
-    with st.expander(t["full_fi"]):
-        full_fi = data["feature_importance"]
-        if full_fi.empty:
-            st.info(t["missing"])
+    with st.expander("术语补充与完整特征表"):
+        st.markdown(
+            """
+`R²` 用于衡量预测与真实值的一致程度，数值越高代表拟合越好。  
+`消融` 是逐项加入新特征并比较效果的过程，可用于判断改进来源。  
+`特征重要性` 反映模型在当前数据中对变量的依赖程度，不直接代表因果关系。
+            """
+        )
+        if not all_fi.empty:
+            st.dataframe(all_fi.head(200), use_container_width=True)
         else:
-            st.dataframe(full_fi.head(200), use_container_width=True)
-
-    st.success(t["feature_takeaway"])
-    render_continue_hint(t["tabs"][4], t, key="continue_3")
+            st.info("当前版本未找到 `feature_importance.csv`")
 
 
-def show_predictions(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(4, t["s4_prev"], t["s4_core"], t["s4_next"], t)
 
-    preds = ensure_scenario(data["predictions"])
+def show_predictions_and_errors(data: Dict[str, object]) -> None:
+    st.subheader("预测与误差")
+    render_story_header(
+        "上一页解释了模型为什么有效，这一步说明模型在哪些位置更稳。",
+        "误差分布可用于识别高波动时段和难预测站点，为后续优化提供方向。",
+        "下一步给出完整结论，并整理可以直接落地的改进建议。",
+    )
+    preds = data["predictions"]
     errs = data["error_analysis"]
+
     if preds.empty:
-        st.warning(t["missing"])
+        st.warning("当前版本缺少 `predictions.csv`")
         return
 
-    st.markdown(f"**{t['resid_img']}**")
-    if data["residual_img"].exists():
-        st.image(str(data["residual_img"]), use_container_width=True)
-    else:
-        st.info(t["missing"])
+    preds = ensure_scenario(preds)
 
-    st.markdown(f"**{t['model_img']}**")
-    if data["model_comparison_img"].exists():
-        st.image(str(data["model_comparison_img"]), use_container_width=True)
+    st.markdown("**残差分布图 自动生成**")
+    img = data["residual_img"]
+    if img.exists():
+        st.image(str(img), use_container_width=True)
     else:
-        st.info(t["missing"])
+        st.info("未找到 `residual_distribution.png`")
 
-    st.markdown(f"**{t['view_pred']}**")
+    st.markdown("**模型对比图 自动生成**")
+    img2 = data["model_comparison_img"]
+    if img2.exists():
+        st.image(str(img2), use_container_width=True)
+    else:
+        st.info("未找到 `model_comparison.png`")
+
+    st.markdown("**按场景 分段 模型查看预测样本**")
     c1, c2, c3 = st.columns(3)
-    s = c1.selectbox("Scenario", sorted(preds["scenario"].unique()), key="pred_scenario")
-    g = c2.selectbox("Segment", sorted(preds["segment"].unique()), key="pred_segment")
-    m = c3.selectbox("Model", sorted(preds["model"].unique()), key="pred_model")
+    s = c1.selectbox("Scenario", sorted(preds["scenario"].unique()))
+    g = c2.selectbox("Segment", sorted(preds["segment"].unique()))
+    m = c3.selectbox("Model", sorted(preds["model"].unique()))
 
-    pred_view = preds[(preds["scenario"] == s) & (preds["segment"] == g) & (preds["model"] == m)]
-    st.dataframe(pred_view.head(300), use_container_width=True)
+    view = preds[(preds["scenario"] == s) & (preds["segment"] == g) & (preds["model"] == m)]
+    st.dataframe(view.head(300), use_container_width=True)
 
-    st.markdown(f"**{t['err_station']}**")
-    if errs.empty:
-        st.info(t["missing"])
-    else:
+    st.markdown("**误差汇总 站点粒度**")
+    if not errs.empty:
         st.dataframe(errs.head(200), use_container_width=True)
 
-    st.success(t["pred_takeaway"])
-    render_continue_hint(t["tabs"][5], t, key="continue_4")
 
 
-def show_next_steps(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(5, t["s5_prev"], t["s5_core"], t["s5_next"], t)
+def show_explanation_text(data: Dict[str, object]) -> None:
+    st.subheader("文字解释与结论")
+    render_story_header(
+        "上一页给出模型边界，这一步形成整体总结。",
+        "当前流程已具备复跑能力，并验证了空间与事件信息对预测改进的价值。",
+        "可在此基础上扩展更细粒度事件表与更强时空模型，持续提升稳定性。",
+    )
 
-    st.markdown(f"**{t['conclusion']}**")
-    if data["conclusion"]:
-        st.markdown(data["conclusion"])
+    st.markdown("**结论草稿 `conclusion_draft.md`**")
+    conclusion = data["conclusion"]
+    if conclusion:
+        st.markdown(conclusion)
     else:
-        st.info(t["missing"])
+        st.info("当前版本未找到 `conclusion_draft.md`")
 
-    st.markdown(f"**{t['report']}**")
-    if data["report"]:
-        st.code(data["report"][:8000], language="markdown")
+    st.markdown("**报告摘要 `report.md`**")
+    report = data["report"]
+    if report:
+        st.code(report[:8000], language="markdown")
     else:
-        st.info(t["missing"])
+        st.info("当前版本未找到 `report.md`")
 
-    st.markdown(f"**{t['next_actions']}**")
-    st.markdown(f"1. {t['action1']}")
-    st.markdown(f"2. {t['action2']}")
-    st.markdown(f"3. {t['action3']}")
 
 
 def main() -> None:
-    st.set_page_config(page_title="Casa0004 Story Dashboard", layout="wide")
-
-    lang = st.sidebar.radio(I18N["zh"]["lang"], ["中文", "English"], index=0)
-    key = "zh" if lang == "中文" else "en"
-    t = I18N[key]
-
-    st.title(t["title"])
+    st.set_page_config(page_title="Casa0004 可视化看板", layout="wide")
+    st.title("Casa0004 Pipeline 可视化看板")
 
     runs = list_runs()
     if not runs:
-        st.error(f"No runs found under: {OUTPUTS_DIR}")
+        st.error(f"未找到 run 目录 {OUTPUTS_DIR}")
         return
 
     run_names = [r.name for r in runs]
-    selected_name = st.sidebar.selectbox(t["current_run"], run_names, index=len(run_names) - 1)
+    default_idx = len(runs) - 1
+
+    st.sidebar.header("运行选择")
+    selected_name = st.sidebar.selectbox("结果版本", run_names, index=default_idx)
     selected_run = OUTPUTS_DIR / selected_name
 
     st.sidebar.markdown("---")
-    st.sidebar.markdown(f"**{t['run_select']}**")
-    st.sidebar.markdown(f"`{selected_name}`")
-    st.sidebar.markdown("---")
-    st.sidebar.markdown(f"**{t['note']}**")
-    st.sidebar.markdown(f"- {t['note1']}")
-    st.sidebar.markdown(f"- {t['note2']}")
+    st.sidebar.markdown("**阅读说明**")
+    st.sidebar.markdown("- 页面按背景 方法 结果 解释 误差 结论顺序组织")
+    st.sidebar.markdown("- 旧版 run 若缺少 `ablation` 或 `spatial` 文件会自动降级显示")
+    st.sidebar.markdown("- 指标比较以 `R²` 为主，同时可结合 MAE 和 RMSE 观察")
 
     data = load_run_artifacts(selected_run)
 
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(t["tabs"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+        ["概览", "流程工件", "结果消融", "特征解释", "预测误差", "文字结论"]
+    )
 
     with tab1:
-        show_overview(data, selected_run, t)
+        show_overview(selected_run, data)
     with tab2:
-        show_method(data, t)
+        show_pipeline_process(data)
     with tab3:
-        show_results(data, t)
+        show_metrics_and_ablation(data)
     with tab4:
-        show_feature_insights(data, t)
+        show_feature_insights(data)
     with tab5:
-        show_predictions(data, t)
+        show_predictions_and_errors(data)
     with tab6:
-        show_next_steps(data, t)
+        show_explanation_text(data)
 
 
 if __name__ == "__main__":
