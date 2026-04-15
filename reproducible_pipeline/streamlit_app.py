@@ -23,10 +23,10 @@ I18N = {
         "note2": "专业术语被放在“补充解释”里，主文案尽量通俗。",
         "tabs": ["1 背景", "2 方法", "3 结果", "4 原因", "5 边界", "6 下一步"],
         "story_steps": ["背景问题", "如何做", "做出来什么", "为什么有效", "风险与不足", "改进空间"],
-        "header_q": "这一步回答的问题",
-        "header_prev": "承接上一页",
-        "header_core": "本页核心结论",
-        "header_next": "看完后建议去",
+        "header_q": "这一页想回答",
+        "header_prev": "先接上一步",
+        "header_core": "你会在这一页得到",
+        "header_next": "看完后自然进入",
         "continue": "继续阅读",
         "continue_hint": "请点击上方 Tab：",
         "missing": "当前版本缺少这个文件，已自动降级显示。",
@@ -68,6 +68,24 @@ I18N = {
         "g_r2": "R²：衡量模型解释能力的指标，通常越高越好。",
         "g_ablation": "消融（Ablation）：每次只增加一个改动，比较是否真的带来提升。",
         "g_fi": "特征重要性：模型在预测时更依赖哪些输入信息。",
+        "s0_prev": "这是故事开场，我们先把问题讲清楚。",
+        "s0_core": "先回答“为什么要做这件事”，再进入方法。",
+        "s0_next": "2 方法",
+        "s1_prev": "现在我们已经知道了问题，接下来解释我们怎么一步步做出来。",
+        "s1_core": "把原始数据整理成模型能理解的信息，并保证可复现。",
+        "s1_next": "3 结果",
+        "s2_prev": "方法准备好之后，这一页看结果到底有没有变好。",
+        "s2_core": "对比不同方案，找出真正有效的改动。",
+        "s2_next": "4 原因",
+        "s3_prev": "看到结果之后，我们继续回答：为什么会变好？",
+        "s3_core": "找出模型最依赖的关键信号，避免“只看分数”。",
+        "s3_next": "5 边界",
+        "s4_prev": "知道了有效因素后，还要看模型在哪些地方不稳定。",
+        "s4_core": "定位误差大的场景，明确当前方案的边界。",
+        "s4_next": "6 下一步",
+        "s5_prev": "最后把前面五步收拢成一条完整结论。",
+        "s5_core": "给出可执行的下一步，而不是停在分析结论。",
+        "s5_next": "故事结束",
     },
     "en": {
         "title": "Casa0004 Bike-Sharing Story Dashboard",
@@ -79,10 +97,10 @@ I18N = {
         "note2": "Technical terms are moved into “Glossary”, while the main text stays plain-language.",
         "tabs": ["1 Background", "2 Method", "3 Results", "4 Why It Works", "5 Limits", "6 Next Step"],
         "story_steps": ["Problem", "How we did it", "What we got", "Why it works", "Risks & limits", "Improvement"],
-        "header_q": "Question answered in this step",
-        "header_prev": "Bridge from previous tab",
-        "header_core": "Core takeaway",
-        "header_next": "Where to go next",
+        "header_q": "What this page answers",
+        "header_prev": "Building from the previous page",
+        "header_core": "What you will take away here",
+        "header_next": "Natural next stop",
         "continue": "Continue",
         "continue_hint": "Please open the tab:",
         "missing": "This file is missing in the selected run. Fallback view is shown.",
@@ -124,6 +142,24 @@ I18N = {
         "g_r2": "R²: model explanatory score; higher is usually better.",
         "g_ablation": "Ablation: add one change at a time to verify real incremental value.",
         "g_fi": "Feature importance: which inputs the model depends on most.",
+        "s0_prev": "This is the opening of the story, where we frame the real-world problem.",
+        "s0_core": "Start with why this work matters before jumping into methods.",
+        "s0_next": "2 Method",
+        "s1_prev": "Now that the problem is clear, we explain how the solution is built step by step.",
+        "s1_core": "Turn raw data into reliable model signals, with reproducibility in mind.",
+        "s1_next": "3 Results",
+        "s2_prev": "With the method in place, we now check whether performance actually improves.",
+        "s2_core": "Compare scenarios to identify changes that truly add value.",
+        "s2_next": "4 Why It Works",
+        "s3_prev": "After seeing the scores, we answer why the model improves.",
+        "s3_core": "Highlight the signals the model relies on most, beyond headline metrics.",
+        "s3_next": "5 Limits",
+        "s4_prev": "Even good models have weak spots; this page maps those boundaries.",
+        "s4_core": "Locate high-error cases and clarify where the current setup is less stable.",
+        "s4_next": "6 Next Step",
+        "s5_prev": "This is the wrap-up page that ties the whole story together.",
+        "s5_core": "Translate findings into concrete, practical next actions.",
+        "s5_next": "End of story",
     },
 }
 
@@ -209,9 +245,9 @@ def render_continue_hint(next_tab_label: str, t: Dict[str, object], key: str) ->
 def show_overview(data: Dict[str, object], current_run: Path, t: Dict[str, object]) -> None:
     render_step_header(
         0,
-        prev_text="这是故事起点。" if "背景" in t["story_steps"][0] else "Story starts here.",
-        core_text=t["overview_goal"],
-        next_text=t["tabs"][1],
+        prev_text=t["s0_prev"],
+        core_text=t["s0_core"],
+        next_text=t["s0_next"],
         t=t,
     )
     st.markdown(f"- {t['overview_intro']}")
@@ -235,7 +271,7 @@ def show_overview(data: Dict[str, object], current_run: Path, t: Dict[str, objec
 
 
 def show_method(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(1, t["overview_goal"], t["method_intro"], t["tabs"][2], t)
+    render_step_header(1, t["s1_prev"], t["s1_core"], t["s1_next"], t)
     st.markdown(f"1. {t['method_block1']}")
     st.markdown(f"2. {t['method_block2']}")
     st.markdown(f"3. {t['method_block3']}")
@@ -258,7 +294,7 @@ def show_method(data: Dict[str, object], t: Dict[str, object]) -> None:
 
 
 def show_results(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(2, t["method_intro"], t["result_intro"], t["tabs"][3], t)
+    render_step_header(2, t["s2_prev"], t["s2_core"], t["s2_next"], t)
 
     metrics = ensure_scenario(data["metrics"])
     if metrics.empty:
@@ -306,7 +342,7 @@ def show_results(data: Dict[str, object], t: Dict[str, object]) -> None:
 
 
 def show_feature_insights(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(3, t["result_intro"], t["feature_intro"], t["tabs"][4], t)
+    render_step_header(3, t["s3_prev"], t["s3_core"], t["s3_next"], t)
 
     spatial = data["spatial_fi"]
     if spatial.empty:
@@ -335,7 +371,7 @@ def show_feature_insights(data: Dict[str, object], t: Dict[str, object]) -> None
 
 
 def show_predictions(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(4, t["feature_intro"], t["pred_intro"], t["tabs"][5], t)
+    render_step_header(4, t["s4_prev"], t["s4_core"], t["s4_next"], t)
 
     preds = ensure_scenario(data["predictions"])
     errs = data["error_analysis"]
@@ -375,7 +411,7 @@ def show_predictions(data: Dict[str, object], t: Dict[str, object]) -> None:
 
 
 def show_next_steps(data: Dict[str, object], t: Dict[str, object]) -> None:
-    render_step_header(5, t["pred_intro"], t["next_intro"], "—", t)
+    render_step_header(5, t["s5_prev"], t["s5_core"], t["s5_next"], t)
 
     st.markdown(f"**{t['conclusion']}**")
     if data["conclusion"]:
